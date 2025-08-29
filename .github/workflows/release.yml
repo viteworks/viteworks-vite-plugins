@@ -69,5 +69,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           branch: main
-          commit_message: "chore: 🚀 version packages"
           github_token: ${{ secrets.GITHUB_TOKEN }}
