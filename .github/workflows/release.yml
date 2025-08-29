@@ -47,8 +47,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - run: whoami
       
       - name: Version packages and publish to npm
         id: changesets
@@ -59,8 +57,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           npm_config_registry: https://registry.npmjs.org
-          
-      - name: Commit and push changes
+
+      - name: Git add and commit version changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff-index --quiet HEAD || git commit -m "chore: 🚀 version packages"
+
+      - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           branch: main
