@@ -63,7 +63,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git diff-index --quiet HEAD || git commit -m "chore: 🚀 version packages"
+          git diff-index --quiet HEAD || git commit -m "$(pnpm changeset status --json | node -e 'const s=JSON.parse(require("fs").readFileSync(0,"utf-8"));console.log("chore: 🚀 version packages\\n\\n" + s.map(p=>`${p.name} → ${p.newVersion}`).join("\\n"))')"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
