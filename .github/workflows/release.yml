@@ -44,7 +44,10 @@ jobs:
 
       - name: set npm whomai
       - run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          
       - run: whoami
       
       - name: Version packages and publish to npm
