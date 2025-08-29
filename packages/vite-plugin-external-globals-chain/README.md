@@ -8,7 +8,7 @@ A Vite plugin wrapper for [vite-plugin-external](https://github.com/fengxinming/
 ## Features
 
 - 🎯 **Array-based configuration**: Use arrays to define nested global variable paths
-- 🔄 **Automatic conversion**: Arrays are converted to `window.x.y.z` format automatically  
+- 🔄 **Automatic conversion**: Arrays are converted to `window.x.y.z` format automatically
 - 🛡️ **Type safety**: Full TypeScript support with comprehensive type definitions
 - ⚡ **Zero overhead**: Minimal wrapper that delegates to vite-plugin-external
 - 🧪 **Well tested**: Comprehensive test suite with 100% coverage
@@ -29,49 +29,49 @@ pnpm add @viteworks/vite-plugin-external-globals-chain
 
 ```typescript
 // vite.config.ts
-import { defineConfig } from 'vite'
-import windowExternal from 'vite-plugin-external-globals-chain'
+import { defineConfig } from "vite";
+import windowExternal from "vite-plugin-external-globals-chain";
 
 export default defineConfig({
   plugins: [
     windowExternal({
       // Array format - converted to 'window.ralWindows.React'
-      'react': ['ralWindows', 'React'],
-      
-      // Array format - converted to 'window.ralWindows.ReactDOM'  
-      'react-dom': ['ralWindows', 'ReactDOM'],
-      
+      react: ["ralWindows", "React"],
+
+      // Array format - converted to 'window.ralWindows.ReactDOM'
+      "react-dom": ["ralWindows", "ReactDOM"],
+
       // String format - passed through unchanged
-      'lodash': 'window._'
-    })
-  ]
-})
+      lodash: "window._",
+    }),
+  ],
+});
 ```
 
 ### Advanced Configuration
 
 ```typescript
 // vite.config.ts
-import { defineConfig } from 'vite'
-import windowExternal from 'vite-plugin-external-globals-chain'
+import { defineConfig } from "vite";
+import windowExternal from "vite-plugin-external-globals-chain";
 
 export default defineConfig({
   plugins: [
     windowExternal({
       // Deep nesting support
-      'some-library': ['MyApp', 'vendors', 'SomeLibrary'],
+      "some-library": ["MyApp", "vendors", "SomeLibrary"],
       // Result: 'window.MyApp.vendors.SomeLibrary'
-      
+
       // Mixed configuration
-      'jquery': 'window.$',
-      'moment': ['MyApp', 'libs', 'moment'],
-      
+      jquery: "window.$",
+      moment: ["MyApp", "libs", "moment"],
+
       // Single-level arrays
-      'axios': ['httpClient']
+      axios: ["httpClient"],
       // Result: 'window.httpClient'
-    })
-  ]
-})
+    }),
+  ],
+});
 ```
 
 ### HTML Setup
@@ -81,32 +81,32 @@ Make sure your HTML includes the global variables before your bundled code:
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <script>
-    // Set up global variables that match your configuration
-    window.ralWindows = {
-      React: React,
-      ReactDOM: ReactDOM
-    };
-    
-    window.MyApp = {
-      vendors: {
-        SomeLibrary: SomeLibrary
-      },
-      libs: {
-        moment: moment
-      }
-    };
-  </script>
-  
-  <!-- Load your external libraries -->
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-</head>
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.ts"></script>
-</body>
+  <head>
+    <script>
+      // Set up global variables that match your configuration
+      window.ralWindows = {
+        React: React,
+        ReactDOM: ReactDOM,
+      };
+
+      window.MyApp = {
+        vendors: {
+          SomeLibrary: SomeLibrary,
+        },
+        libs: {
+          moment: moment,
+        },
+      };
+    </script>
+
+    <!-- Load your external libraries -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
 ```
 
@@ -143,6 +143,7 @@ type ExternalValue = string[] | string;
 ```
 
 The value type for external dependencies:
+
 - `string[]`: Array of path segments that will be joined with dots and prefixed with 'window.'
 - `string`: Direct global variable path (passed through unchanged)
 
@@ -153,28 +154,31 @@ The value type for external dependencies:
 When you provide an array value:
 
 1. **Non-empty arrays**: Arrays must contain at least one element
+
    ```typescript
    // ✅ Valid
    'react': ['MyNamespace', 'React']
-   
+
    // ❌ Invalid - will throw error
    'react': []
    ```
 
 2. **String elements only**: All array elements must be strings
+
    ```typescript
    // ✅ Valid
    'lodash': ['utils', 'lodash']
-   
+
    // ❌ Invalid - will throw TypeError
    'lodash': ['utils', 123, 'lodash']
    ```
 
 3. **Automatic prefixing**: Arrays are automatically prefixed with 'window.'
+
    ```typescript
    // Input
    'react': ['MyApp', 'React']
-   
+
    // Output (passed to vite-plugin-external)
    'react': 'window.MyApp.React'
    ```
@@ -187,7 +191,7 @@ String values are passed through unchanged to vite-plugin-external:
 // Input
 'jquery': 'window.$'
 
-// Output (passed to vite-plugin-external)  
+// Output (passed to vite-plugin-external)
 'jquery': 'window.$'
 ```
 
@@ -200,8 +204,8 @@ The plugin provides clear error messages for invalid configurations:
 ```typescript
 // This will throw: Error('External value array for "react" cannot be empty')
 windowExternal({
-  'react': []
-})
+  react: [],
+});
 ```
 
 ### Type Error
@@ -209,8 +213,8 @@ windowExternal({
 ```typescript
 // This will throw: TypeError('All array elements for "react" must be strings')
 windowExternal({
-  'react': ['MyApp', 123, 'React']
-})
+  react: ["MyApp", 123, "React"],
+});
 ```
 
 ## Development
@@ -219,8 +223,8 @@ windowExternal({
 
 ```bash
 # Clone the repository
-git clone https://github.com/username/vite-plugin-external-globals-chain.git
-cd vite-plugin-external-globals-chain
+git clone https://github.com/viteworks/vite-plugins.git
+cd vite-plugins/packages/vite-plugin-external-globals-chain
 
 # Install dependencies
 npm install

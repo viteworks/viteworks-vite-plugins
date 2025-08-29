@@ -1,10 +1,10 @@
-# Vite Plugins Workspace
+# @viteworks/vite-plugins
 
-A collection of Vite plugins managed as a pnpm workspace.
+A collection of Vite plugins by ViteWorks, managed as a pnpm workspace.
 
 ## Packages
 
-- [`vite-plugin-external-globals-chain`](./packages/vite-plugin-external-globals-chain) - (In development)
+- [`@viteworks/vite-plugin-external-globals-chain`](./packages/vite-plugin-external-globals-chain) - A Vite plugin wrapper for vite-plugin-external that supports array-based global variable paths
 
 ## Development
 
@@ -43,8 +43,8 @@ pnpm dev
 
 ```bash
 # Run commands in specific package
-pnpm --filter vite-plugin-external-globals-chain build
-pnpm --filter vite-plugin-external-globals-chain test
+pnpm --filter @viteworks/vite-plugin-external-globals-chain build
+pnpm --filter @viteworks/vite-plugin-external-globals-chain test
 
 # Or navigate to package directory
 cd packages/vite-plugin-external-globals-chain
