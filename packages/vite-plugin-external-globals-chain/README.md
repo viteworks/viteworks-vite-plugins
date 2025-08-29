@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/@viteworks%2Fvite-plugin-external-globals-chain.svg)](https://badge.fury.io/js/@viteworks%2Fvite-plugin-external-globals-chain)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A Vite plugin wrapper for [vite-plugin-external](https://github.com/fengxinming/vite-plugins/tree/main/packages/vite-plugin-external) that supports array-based global variable paths. This plugin allows you to configure external dependencies using arrays to represent nested global variable paths, which are automatically converted to dot-notation strings.
+A powerful Vite plugin that allows you to externalize dependencies and map them to global variables with support for array-based nested paths. This plugin transforms import statements to access global variables, enabling you to use CDN-loaded libraries while maintaining clean import syntax in your code.
 
 ## Features
 

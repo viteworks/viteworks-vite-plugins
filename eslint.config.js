@@ -19,14 +19,20 @@ export default [
       '@stylistic': stylistic,
     },
     rules: {
-      // 
+      // Disable base rules that are covered by TypeScript rules
+      'no-unused-vars': 'off',
+
+      // Basic rules
       'prefer-const': 'error',
 
       // TypeScript rules
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-unused-vars': ['error', {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        ignoreRestSiblings: true,
+      }],
       '@typescript-eslint/no-explicit-any': 'warn',
 
-      
       // Stylistic rules
       '@stylistic/indent': ['error', 2],
       '@stylistic/quotes': ['error', 'single'],
@@ -39,7 +45,7 @@ export default [
       '@stylistic/space-infix-ops': 'error',
       '@stylistic/no-trailing-spaces': 'error',
       '@stylistic/eol-last': 'error',
-      '@stylistic/max-len': ['error', { code: 100, ignoreUrls: true }],
+      '@stylistic/max-len': ['error', { code: 120, ignoreUrls: true }],
     },
   },
   {
@@ -53,10 +59,10 @@ export default [
     },
     languageOptions: {
       globals: {
-        __dirname: "readonly",
-        require: "readonly",
-        module: "readonly",
-        process: "readonly",
+        __dirname: 'readonly',
+        require: 'readonly',
+        module: 'readonly',
+        process: 'readonly',
       },
     },
   },
