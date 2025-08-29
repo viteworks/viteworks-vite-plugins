@@ -46,6 +46,7 @@ jobs:
       - run: npm whoami
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Version packages and publish to npm
         id: changesets
