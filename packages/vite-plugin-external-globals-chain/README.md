@@ -30,7 +30,7 @@ pnpm add @viteworks/vite-plugin-external-globals-chain
 ```typescript
 // vite.config.ts
 import { defineConfig } from "vite";
-import windowExternal from "vite-plugin-external-globals-chain";
+import windowExternal from "@viteworks/vite-plugin-external-globals-chain";
 
 export default defineConfig({
   plugins: [
@@ -53,7 +53,7 @@ export default defineConfig({
 ```typescript
 // vite.config.ts
 import { defineConfig } from "vite";
-import windowExternal from "vite-plugin-external-globals-chain";
+import windowExternal from "@viteworks/vite-plugin-external-globals-chain";
 
 export default defineConfig({
   plugins: [
