@@ -1,6 +1,6 @@
 {
   "name": "@viteworks/vite-plugin-external-globals-chain",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A Vite plugin wrapper for vite-plugin-external that supports array-based global variable paths",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
