@@ -1,0 +1,87 @@
+# Gitmoji 使用指南
+
+本项目使用 gitmoji 规范来标准化提交信息。每个提交都必须以相应的 emoji 开头。
+
+## 常用 Gitmoji
+
+### 功能相关
+- ✨ `:sparkles:` - 引入新功能
+- 🎉 `:tada:` - 初始化项目
+- 🚀 `:rocket:` - 部署功能
+- 🔥 `:fire:` - 移除代码或文件
+
+### 修复相关
+- 🐛 `:bug:` - 修复 bug
+- 🚑️ `:ambulance:` - 重要补丁
+- 🩹 `:adhesive_bandage:` - 简单修复
+
+### 文档相关
+- 📝 `:memo:` - 添加或更新文档
+- 💡 `:bulb:` - 添加或更新注释
+
+### 样式相关
+- 💄 `:lipstick:` - 添加或更新 UI 和样式文件
+- 🎨 `:art:` - 改进代码结构/格式
+
+### 性能相关
+- ⚡️ `:zap:` - 提高性能
+- 🐎 `:racehorse:` - 提高性能
+
+### 重构相关
+- ♻️ `:recycle:` - 重构代码
+- 🔨 `:hammer:` - 重构代码
+
+### 测试相关
+- ✅ `:white_check_mark:` - 添加、更新或通过测试
+- 🧪 `:test_tube:` - 添加失败的测试
+
+### 依赖相关
+- ➕ `:heavy_plus_sign:` - 添加依赖
+- ➖ `:heavy_minus_sign:` - 移除依赖
+- ⬆️ `:arrow_up:` - 升级依赖
+- ⬇️ `:arrow_down:` - 降级依赖
+- 📌 `:pushpin:` - 将依赖项固定到特定版本
+
+### 配置相关
+- 🔧 `:wrench:` - 添加或更新配置文件
+- ⚙️ `:gear:` - 添加或更新配置文件
+- 🔒️ `:lock:` - 修复安全问题
+
+### CI/CD 相关
+- 👷 `:construction_worker:` - 添加或更新 CI 构建系统
+- 💚 `:green_heart:` - 修复 CI 构建问题
+
+## 提交信息格式
+
+```
+<gitmoji> <type>: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### 示例
+
+```bash
+git commit -m "✨ feat: add array-based global variable path support"
+git commit -m "🐛 fix: handle empty array configuration correctly"
+git commit -m "📝 docs: update README with usage examples"
+git commit -m "🧪 test: add integration tests for plugin"
+git commit -m "🔧 config: setup ESLint and commitlint"
+```
+
+## 类型说明
+
+- **feat**: 新功能
+- **fix**: 修复
+- **docs**: 文档
+- **style**: 格式（不影响代码运行的变动）
+- **refactor**: 重构
+- **test**: 增加测试
+- **chore**: 构建过程或辅助工具的变动
+- **perf**: 性能优化
+- **ci**: CI/CD 相关
+- **build**: 构建相关
+
+更多 gitmoji 请参考：https://gitmoji.dev/

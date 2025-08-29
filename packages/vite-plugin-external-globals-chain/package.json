@@ -1,0 +1,60 @@
+{
+  "name": "@viteworks/vite-plugin-external-globals-chain",
+  "version": "0.0.0",
+  "description": "A Vite plugin wrapper for vite-plugin-external that supports array-based global variable paths",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "build:clean": "rm -rf dist && npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src tests --fix && tsc --noEmit",
+    "prepublishOnly": "npm run build:clean && npm run test",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "vite",
+    "plugin",
+    "external",
+    "window",
+    "global"
+  ],
+  "author": "",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viteworks/vite-plugins.git",
+    "directory": "packages/vite-plugin-external-globals-chain"
+  },
+  "homepage": "https://github.com/viteworks/vite-plugins/tree/main/packages/vite-plugin-external-globals-chain#readme",
+  "bugs": {
+    "url": "https://github.com/viteworks/vite-plugins/issues"
+  },
+  "peerDependencies": {
+    "vite": "^4.0.0 || ^5.0.0"
+  },
+  "dependencies": {
+    "vite-plugin-external": "^4.0.0"
+  },
+  "devDependencies": {
+    "vite": "^7.1.3",
+    "vitest": "^3.2.4"
+  }
+}
