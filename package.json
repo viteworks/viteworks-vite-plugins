@@ -15,6 +15,7 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish",
+    "commit-version": "node scripts/commit-version-changes.js",
     "cz": "git add . && pnpm exec git-cz"
   },
   "keywords": [
