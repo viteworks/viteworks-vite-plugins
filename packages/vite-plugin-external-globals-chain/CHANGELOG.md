@@ -1,5 +1,11 @@
 # @viteworks/vite-plugin-external-globals-chain
 
+## 0.0.3
+
+### Patch Changes
+
+- b186208: 发布 patch 版本
+
 ## 0.0.2
 
 ### Patch Changes
