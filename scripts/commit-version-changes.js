@@ -2,6 +2,8 @@
 /* eslint-disable no-undef */
 
 import { execSync } from 'child_process'
+import { readFileSync, readdirSync, statSync } from 'fs'
+import { join } from 'path'
 
 /**
  * 执行命令并返回输出
@@ -24,34 +26,90 @@ function exec(command, options = {}) {
  */
 function hasChanges() {
   try {
-    exec('git diff-index --quiet HEAD')
-    return false
+    const status = exec('git status --porcelain')
+    return status.length > 0
   } catch {
-    return true
+    return false
   }
 }
 
 /**
- * 获取 changeset 状态并生成 commit 信息
+ * 获取所有 packages 目录下的 package.json 文件
+ */
+function getPackageJsonFiles() {
+  const packagesDir = 'packages'
+  const packageFiles = []
+
+  try {
+    const packages = readdirSync(packagesDir)
+
+    for (const pkg of packages) {
+      const pkgPath = join(packagesDir, pkg)
+      const stat = statSync(pkgPath)
+
+      if (stat.isDirectory()) {
+        const packageJsonPath = join(pkgPath, 'package.json')
+        try {
+          statSync(packageJsonPath)
+          packageFiles.push(packageJsonPath)
+        } catch {
+          // package.json 不存在，跳过
+        }
+      }
+    }
+  } catch(error) {
+    console.warn('Failed to read packages directory:', error.message)
+  }
+
+  return packageFiles
+}
+
+/**
+ * 获取包的版本变更信息
+ */
+function getVersionChanges() {
+  const packageFiles = getPackageJsonFiles()
+  const changes = []
+
+  for (const filePath of packageFiles) {
+    try {
+      // 检查这个文件是否在 git 变更中
+      const gitStatus = exec(`git status --porcelain "${filePath}"`)
+      if (!gitStatus) continue
+
+      const packageJson = JSON.parse(readFileSync(filePath, 'utf-8'))
+      const { name, version } = packageJson
+
+      if (name && version) {
+        changes.push({ name, version, path: filePath })
+      }
+    } catch(error) {
+      console.warn(`Failed to read ${filePath}:`, error.message)
+    }
+  }
+
+  return changes
+}
+
+/**
+ * 生成 commit 信息
  */
 function generateCommitMessage() {
-  try {
-    const statusOutput = exec('pnpm changeset status --json')
-    const changes = JSON.parse(statusOutput)
+  const versionChanges = getVersionChanges()
 
-    if (!changes || changes.length === 0) {
-      return 'chore: 🚀 version packages'
-    }
-
-    const packageUpdates = changes
-      .map(pkg => `${pkg.name} → ${pkg.newVersion}`)
-      .join('\n')
-
-    return `chore: 🚀 version packages\n\n${packageUpdates}`
-  } catch {
-    console.warn('Failed to get changeset status, using default message')
-    return 'chore: 🚀 version packages'
+  if (versionChanges.length === 0) {
+    return 'chore: 🚀 release packages'
   }
+
+  const title = versionChanges.length === 1
+    ? 'chore: 🚀 release package'
+    : 'chore: 🚀 release packages'
+
+  const body = versionChanges
+    .map(pkg => `- ${pkg.name}@${pkg.version}`)
+    .join('\n')
+
+  return `${title}\n\n${body}`
 }
 
 /**
@@ -79,7 +137,8 @@ function main() {
 
     // 显示状态
     console.log('Git status:')
-    console.log(exec('git status --porcelain'))
+    const status = exec('git status --porcelain')
+    console.log(status || 'No changes')
 
     // 检查是否有变更
     if (!hasChanges()) {
